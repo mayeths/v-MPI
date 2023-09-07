@@ -26,3 +26,6 @@ pilgrim-logs/
 # Don't ignore timing.h and timing.c
 *.dSYM
 Makefile.in
+
+# demo/
+demo/external/
