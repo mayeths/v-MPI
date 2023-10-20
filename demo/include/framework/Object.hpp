@@ -18,10 +18,15 @@ public:
     glm::vec3 position     = glm::vec3(0.0f, 0.0f, 0.0f);
     glm::vec3 rotationAxis = glm::vec3(1.0f, 0.0f, 0.0f);
     GLfloat rotationAngle  = 0; /* in radians */
+    bool visible = true;
 public:
     virtual void Update(double now, double lastUpdateTime, GLFWwindow *window) {}
     virtual void Render(double now, double lastRenderTime, const glm::mat4 &view, const glm::mat4 &projection) = 0;
 
+    void SetVisibility(bool visible)
+    {
+        this->visible = visible;
+    }
     void MoveTo(glm::vec3 newPosition)
     {
         this->position = newPosition;

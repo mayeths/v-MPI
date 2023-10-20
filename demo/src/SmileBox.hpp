@@ -24,7 +24,12 @@ public:
     // GLuint VAO = 0, VBO = 0;
     // GLuint VBO = 0;
     int index;
+    int crashed = 0;
 
+    void SetCrashed()
+    {
+        this->crashed = 1;
+    }
     void SetShaderPath(const std::string vertexPath, const std::string fragmentPath)
     {
         this->shader.vertexPath = vertexPath;
@@ -38,6 +43,7 @@ public:
     void Setup(int index)
     {
         this->index = index;
+        this->crashed = 0;
 
         // Shader
         this->shader.Setup();
@@ -143,12 +149,15 @@ public:
         this->texture0.Active(GL_TEXTURE0);
         this->texture1.Active(GL_TEXTURE1);
         this->shader.use();
+        this->shader.setInt("isCrashed", this->crashed);
         this->shader.setInt("texture1", 0);
         this->shader.setInt("texture2", 1);
 
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::translate(model, this->position);
-        model = glm::rotate(model, (float)(45 + now * this->index), this->rotationAxis);
+        // model = glm::rotate(model, (float)(45 + now * this->index), this->rotationAxis);
+        if (!this->crashed)
+            model = glm::rotate(model, (float)(45 + now * 5), this->rotationAxis);
         this->shader.setMat4("projection", projection);
         this->shader.setMat4("view", view);
         this->shader.setMat4("model", model);

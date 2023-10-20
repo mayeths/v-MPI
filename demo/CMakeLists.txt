@@ -35,6 +35,8 @@ elseif(UNIX)
   message(FATAL_ERROR "Unsupported OS")
 endif()
 
+target_include_directories(${EXECUTABLE} PRIVATE "$ENV{MYS_DIR}/include")
+
 # GLFW
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)

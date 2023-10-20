@@ -145,7 +145,8 @@ public:
         glm::mat4 view = camera.GetViewMatrix();
 
         for (auto &object : this->objects) {
-            object->Render(now, lastRenderTime, view, projection);
+            if (object->visible)
+                object->Render(now, lastRenderTime, view, projection);
         }
         gui.Render(now, lastRenderTime);
         this->SwapBuffersAndPollEvents();
